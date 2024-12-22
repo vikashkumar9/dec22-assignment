@@ -22,10 +22,7 @@ const AddPosts = ({ handleView }) => {
       title,
       body: description,
     };
-
     addPost(newPost);
-    setTitle('');
-    setDescription('');
   };
 
   const [addPost, { isLoading, isError, isSuccess }] = useAddPostMutation();

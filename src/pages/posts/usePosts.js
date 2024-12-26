@@ -24,14 +24,17 @@ export const PostProvider = ({ children }) => {
   });
 
   const { currentPage } = query;
+
   const startIndex = useMemo(
-    () => currentPage || NUMBERS.ZERO * NUMBERS.TEN,
+    () => (currentPage - NUMBERS.ONE) * NUMBERS.TEN || NUMBERS.ZERO,
     [currentPage]
   );
 
+  console.log(startIndex);
+
   const reqObject = useMemo(
     () => ({
-      _start: startIndex,
+      _start: startIndex || NUMBERS.ZERO,
       _limit: NUMBERS.TEN,
     }),
     [startIndex]
@@ -45,7 +48,7 @@ export const PostProvider = ({ children }) => {
     setQuery((query) => ({
       ...query,
       view: POST_VIEW.LIST,
-      currentPage: NUMBERS.ZERO,
+      currentPage: NUMBERS.ONE,
     }));
   }, [setQuery]);
 

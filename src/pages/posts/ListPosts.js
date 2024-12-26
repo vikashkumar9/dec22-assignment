@@ -18,12 +18,15 @@ const ListPosts = ({ handleView }) => {
   const handleDelete = (id) => {
     deletePost(id);
   };
+
   const handlePageChange = (pageNumber) => {
+    window.scrollTo(0, 0);
     setQuery((query) => ({
       ...query,
       currentPage: pageNumber,
     }));
   };
+
   useEffect(() => {
     if (isSuccess) {
       setTimeout(() => {
@@ -54,7 +57,7 @@ const ListPosts = ({ handleView }) => {
             className='p-4 bg-white border border-gray-300 shadow-lg rounded-lg hover:shadow-xl transition-shadow'
           >
             <h2 className='text-xl font-semibold text-gray-800'>
-              {post.title}
+              {post.id}:-{post.title}
             </h2>
             <p className='text-gray-600 mt-2'>{post.body}</p>
             <div className='flex justify-between mt-4'>
@@ -87,7 +90,7 @@ const ListPosts = ({ handleView }) => {
         </span>
         <button
           onClick={() => handlePageChange(currentPage + NUMBERS.ONE)}
-          disabled={currentPage === NUMBERS.HUNDERED}
+          disabled={currentPage === NUMBERS.TEN}
           className='px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 disabled:opacity-50'
         >
           Next

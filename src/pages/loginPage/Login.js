@@ -7,6 +7,7 @@ import Facebook from '../../assets/facebook.png';
 import Validation from '../../assets/neg_sign.png';
 import Banner from '../../assets/banner1.png';
 import InputField from './InputField';
+import BackButton from '../backButton/BackButton';
 
 const Login = () => {
   const {
@@ -53,6 +54,7 @@ const Login = () => {
               <InputField
                 id='email'
                 label='Email'
+                type='email'
                 register={register('email', { required: 'Email is required' })}
                 error={errors.email}
                 helperText={
@@ -105,6 +107,9 @@ const Login = () => {
               <div className='flex-1 flex justify-center items-center text-white text-[14px]'>
                 CONTINUE WITH FACEBOOK
               </div>
+            </div>
+            <div className='w-full md:w-[385px] m-auto flex items-center mb-4'>
+              <BackButton className='w-full' />
             </div>
           </div>
         </div>

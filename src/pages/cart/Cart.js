@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MdOutlineDelete } from 'react-icons/md';
+import BackButton from '../backButton/BackButton';
 
 const productList = [
   { id: 1, name: 'Pizza', price: 100, quantity: 1 },
@@ -78,6 +79,7 @@ const Cart = () => {
 
   return (
     <div className='container mx-auto p-4 max-w-screen-lg'>
+      <BackButton />
       <h1 className='text-2xl sm:text-3xl font-bold text-center mb-6 text-gray-800'>
         Shopping Cart
       </h1>

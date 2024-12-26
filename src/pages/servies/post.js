@@ -16,9 +16,8 @@ export const postApi = API.injectEndpoints({
         method: 'POST',
         body: payload,
       }),
-      providesTags: [API_KEYS.POSTS],
+      invalidatesTags: [API_KEYS.POSTS],
     }),
-
     deletePost: builder.mutation({
       query: (id) => ({
         url: `/${API_KEYS.POSTS}/${id}`,

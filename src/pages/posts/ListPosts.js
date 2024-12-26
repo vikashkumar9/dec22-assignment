@@ -4,16 +4,15 @@ import { func } from 'prop-types';
 import { NUMBERS, POST_VIEW } from './utils';
 import AlertSnackbar from './AlertSnackBar';
 import { useDeletePostMutation } from '../servies/post';
+import Spinner from './Spinner';
 
 const ListPosts = ({ handleView }) => {
-  const { posts, setQuery, query } = usePosts();
+  const { posts, setQuery, query, isLoadingPosts, isFetchingPosts } =
+    usePosts();
 
   const { currentPage } = query;
 
-  const [
-    deletePost,
-    { error: isDeleteError, isLoading: isDeleteLoading, isSuccess },
-  ] = useDeletePostMutation();
+  const [deletePost, { isSuccess }] = useDeletePostMutation();
 
   const handleDelete = (id) => {
     deletePost(id);
@@ -35,12 +34,8 @@ const ListPosts = ({ handleView }) => {
     }
   }, [isSuccess]);
 
-  return (
+  const renderList = () => (
     <>
-      <AlertSnackbar
-        show={isSuccess}
-        message='Post has been deleted successfully'
-      />
       <div className='flex justify-between m-8'>
         <h1 className='text-2xl font-bold text-center mb-6'>Posts</h1>
         <button
@@ -96,6 +91,16 @@ const ListPosts = ({ handleView }) => {
           Next
         </button>
       </div>
+    </>
+  );
+  return (
+    <>
+      <AlertSnackbar
+        show={isSuccess}
+        message='Post has been deleted successfully'
+      />
+
+      {isLoadingPosts || isFetchingPosts ? <Spinner /> : renderList()}
     </>
   );
 };

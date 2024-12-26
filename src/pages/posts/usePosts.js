@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { createContext, useContext, useEffect, useMemo } from 'react';
 import { NumberParam, StringParam, useQueryParams } from 'use-query-params';
 import { NUMBERS, POST_VIEW } from './utils';
 import { useGetPostQuery } from '../servies/post';
@@ -14,9 +8,6 @@ const PostContext = createContext();
 export const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 
 export const PostProvider = ({ children }) => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
   const [query, setQuery] = useQueryParams({
     view: StringParam,
     postId: NumberParam,
@@ -30,8 +21,6 @@ export const PostProvider = ({ children }) => {
     [currentPage]
   );
 
-  console.log(startIndex);
-
   const reqObject = useMemo(
     () => ({
       _start: startIndex || NUMBERS.ZERO,
@@ -40,9 +29,11 @@ export const PostProvider = ({ children }) => {
     [startIndex]
   );
 
-  console.log(reqObject);
-
-  const { data: posts } = useGetPostQuery(reqObject);
+  const {
+    data: posts,
+    isLoading: isLoadingPosts,
+    isFetching: isFetchingPosts,
+  } = useGetPostQuery(reqObject);
 
   useEffect(() => {
     setQuery((query) => ({
@@ -56,8 +47,8 @@ export const PostProvider = ({ children }) => {
     <PostContext.Provider
       value={{
         posts,
-        loading,
-        error,
+        isLoadingPosts,
+        isFetchingPosts,
         query,
         setQuery,
       }}

@@ -81,7 +81,7 @@ const ListPosts = ({ handleView }) => {
           Prev
         </button>
         <span className='text-gray-700'>
-          Page {currentPage} of {100}
+          Page {currentPage} of {10}
         </span>
         <button
           onClick={() => handlePageChange(currentPage + NUMBERS.ONE)}
